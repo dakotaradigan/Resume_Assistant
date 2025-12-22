@@ -6,8 +6,8 @@ An AI-powered chatbot showcasing Dakota Radigan's professional experience, skill
 
 **Backend:**
 - FastAPI (REST API)
-- Claude Sonnet 3.5 (Anthropic AI)
-- Qdrant (Vector search - Phase 3)
+- Claude 
+- Qdrant (Vector search)
 
 **Frontend:**
 - Vanilla JavaScript (modular architecture)
