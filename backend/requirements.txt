@@ -1,0 +1,16 @@
+# Core Backend Dependencies
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-dotenv==1.0.0
+
+# AI & LLM
+anthropic==0.28.0
+
+# CORS & HTTP
+python-multipart==0.0.6
+
+# Optional: Vector Search (Phase 3)
+# qdrant-client==1.7.0
+
+# Optional: OpenAI Embeddings (Phase 3)
+# openai==1.30.0

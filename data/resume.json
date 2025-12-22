@@ -1,0 +1,265 @@
+{
+  "personal": {
+    "name": "Dakota Radigan",
+    "title": "Senior Product Manager",
+    "credentials": "MBA",
+    "location": "Seattle, WA",
+    "phone": "425-283-9910",
+    "email": "dakotaradigan@gmail.com",
+    "linkedin": "https://linkedin.com/in/dakota-radigan",
+    "github": "",
+    "portfolio": "",
+    "summary": "Senior Product Manager with 5+ years shipping data-driven investment solutions and managing technical partnerships. Expert in validating client and operational pain points and translating them into functional specifications that drive measurable business impact. Combining deep investment operations knowledge with technical fluency (SQL, Python, AI) and a bias for action."
+  },
+
+  "experience": [
+    {
+      "company": "Parametric Portfolio (Morgan Stanley)",
+      "role": "Vice President, Senior Product Manager",
+      "duration": "Jan 2024 - Present",
+      "location": "Seattle, WA",
+      "type": "Full-time",
+      "description": "Leading product strategy and technical partnerships for investment solutions at a leading direct indexing firm.",
+      "achievements": [
+        "Led technical investment integration with Wells Fargo, aligning internal/external engineering teams to deliver pilot 2 weeks early—securing $32M initial AUM and a $3B+ pipeline",
+        "Launched new investment product MVP ahead of schedule; validated market needs and iterated rapidly to capture $75M AUM within 6 months of release",
+        "Shipped 3 high-impact features reducing manual client touchpoints on ~75k accounts",
+        "Architected a RAG-based GenAI assistant projected to autonomously resolve ~3,500+ annual email inquiries and slash response times for clients from hours to minutes",
+        "Established product analytics to monitor KPIs (time-to-onboard, adoption), identifying friction and pain points to drive data-backed roadmap prioritization",
+        "Appointed firm-wide 'AI Champion,' leading an 8-person task force to drive strategy. Increased Copilot adoption by 60% in 2 months and secured budget for dedicated engineering to scale custom OpenAI API solutions"
+      ],
+      "technologies": ["Python", "SQL", "RAG", "OpenAI API", "GenAI", "Product Analytics"]
+    },
+    {
+      "company": "Parametric Portfolio (Morgan Stanley)",
+      "role": "Vice President, Product Manager",
+      "duration": "Jan 2023 - Jan 2024",
+      "location": "Seattle, WA",
+      "type": "Full-time",
+      "description": "Drove product innovation and cross-functional alignment for investment platform features.",
+      "achievements": [
+        "Awarded firm-wide 'Commitment to Excellence' for leading a scalability initiative that saved 2,500+ operational hours annually through workflow design and feature enhancements",
+        "Partnered with Sales on $200M+ in enterprise deals, acting as the technical SME to translate complex client requirements into executable engineering specifications and ops workflows",
+        "Built a SQL-based analytics framework to identify product usage gaps, enabling a targeted outreach strategy that increased feature utilization by 20% and directly informed roadmap prioritization",
+        "Chaired a cross-functional leadership council (Engineering, Ops, Sales) to break down silos and align priorities, reducing decision cycle times for critical execution items from weeks to days",
+        "Prototyped a Python-based self-service tool for the C-suite, demonstrating the viability of on-going digital service concepts"
+      ],
+      "technologies": ["SQL", "Python", "Cross-functional Leadership", "Enterprise Sales"]
+    },
+    {
+      "company": "Parametric Portfolio (Morgan Stanley)",
+      "role": "Analyst, Product Management",
+      "duration": "Jan 2021 - Jan 2023",
+      "location": "Seattle, WA",
+      "type": "Full-time",
+      "description": "Scaled direct indexing product suite and led platform configuration for new investment strategies.",
+      "achievements": [
+        "Scaled the direct indexing suite by launching 18 new benchmark strategies within 9 months, leading platform configuration to drive $100M+ in new AUM",
+        "Wrote functional specifications for a digital onboarding portal, leading the engineering rollout",
+        "Engineered SQL reporting and heatmaps to diagnose bottlenecks and drive targeted CRM optimizations across Sales, Client Service, and operations"
+      ],
+      "technologies": ["SQL", "CRM Tools", "Platform Configuration", "Requirements Gathering"]
+    },
+    {
+      "company": "Parametric Portfolio (Morgan Stanley)",
+      "role": "Supervisor, Account Onboarding",
+      "duration": "Jul 2019 - Jan 2021",
+      "location": "Seattle, WA",
+      "type": "Full-time",
+      "description": "Led account onboarding team and collaborated with engineering to build internal tools.",
+      "achievements": [
+        "Led a team of 11 directly overseeing the strategic onboarding of $493M in assets (1,200 accounts), optimizing daily operations to improve onboarding times by 4 hours",
+        "Direct dotted line into Engineering as a QA Lead, launching two internal workflow tools that digitized manual tasks and significantly improved process reliability",
+        "Built SQL-based rule systems and Excel models to validate complex logic prior to implementation, reducing errors and provided onboarding metrics"
+      ],
+      "technologies": ["SQL", "Excel", "Team Leadership", "QA", "Operations"]
+    }
+  ],
+
+  "projects": [
+    {
+      "name": "RAG-Based GenAI Assistant",
+      "tagline": "Enterprise chatbot resolving 3,500+ annual client inquiries autonomously",
+      "tech_stack": ["RAG", "OpenAI API", "Python", "Vector Databases", "GenAI"],
+      "description": "Architected an AI-powered assistant for client service automation, reducing response times from hours to minutes through intelligent document retrieval and natural language processing.",
+      "highlights": [
+        "Designed RAG architecture for semantic search over investment documentation",
+        "Projected to autonomously resolve 3,500+ annual email inquiries",
+        "Reduced client response times from hours to minutes",
+        "Integrated with existing client service workflows and CRM systems"
+      ],
+      "problem_solved": "Client service team overwhelmed with repetitive email inquiries about investment accounts, causing slow response times and reduced client satisfaction",
+      "impact": "Projected 3,500+ annual inquiry resolution, response time reduction from hours to minutes",
+      "context": "Built at Parametric Portfolio (Morgan Stanley)",
+      "timeframe": "2024",
+      "repo_url": "",
+      "demo_url": "",
+      "images": [],
+      "detailed_description_file": "rag-genai-assistant.md"
+    },
+    {
+      "name": "Ben AI - Benchmark Eligibility Chatbot",
+      "tagline": "AI-powered financial advisory tool with semantic search",
+      "tech_stack": ["FastAPI", "OpenAI GPT-4", "Pinecone", "WebSockets", "JavaScript", "Python"],
+      "description": "Personal project: Built an enterprise-grade chatbot reducing financial advisor query time by 70% through intelligent benchmark search, iterative function calling, and real-time communication.",
+      "highlights": [
+        "Implemented iterative function calling with safety guardrails (max calls, timeout protection, duplicate detection)",
+        "Designed semantic search using Pinecone vector database with custom embedding pipeline",
+        "Built real-time WebSocket communication with automatic fallback to REST API",
+        "Created Claude-inspired UI with smooth animations and responsive design",
+        "Architected modular backend with separation of concerns (services, models, routing)"
+      ],
+      "problem_solved": "Financial advisors spent 30+ minutes researching benchmark eligibility requirements, leading to late-stage discovery issues",
+      "impact": "Reduced advisor research time from 30 minutes to under 2 minutes per query",
+      "context": "Personal project demonstrating full-stack AI capabilities",
+      "timeframe": "2024",
+      "repo_url": "",
+      "demo_url": "",
+      "images": ["benai-screenshot.png", "benai-architecture.png"],
+      "detailed_description_file": "benai.md"
+    },
+    {
+      "name": "SQL Analytics Framework",
+      "tagline": "Data-driven product usage analytics and roadmap prioritization",
+      "tech_stack": ["SQL", "Data Analysis", "Product Analytics"],
+      "description": "Built comprehensive SQL-based analytics framework to identify product usage gaps and inform data-backed roadmap decisions.",
+      "highlights": [
+        "Engineered SQL reporting and heatmaps to diagnose bottlenecks",
+        "Enabled targeted outreach strategy that increased feature utilization by 20%",
+        "Directly informed roadmap prioritization with usage data",
+        "Monitored KPIs including time-to-onboard and adoption metrics"
+      ],
+      "problem_solved": "Lack of visibility into product usage patterns led to misaligned roadmap priorities and low feature adoption",
+      "impact": "Increased feature utilization by 20%, data-backed roadmap prioritization",
+      "context": "Built at Parametric Portfolio (Morgan Stanley)",
+      "timeframe": "2023-2024",
+      "repo_url": "",
+      "demo_url": "",
+      "images": [],
+      "detailed_description_file": ""
+    },
+    {
+      "name": "Python Self-Service Tool for C-Suite",
+      "tagline": "Executive dashboard prototyping digital service concepts",
+      "tech_stack": ["Python", "Automation", "Data Visualization"],
+      "description": "Prototyped Python-based self-service tool for executive leadership to demonstrate viability of digital service concepts.",
+      "highlights": [
+        "Built executive-facing prototype demonstrating automation potential",
+        "Validated digital service concept with C-suite stakeholders",
+        "Showcased technical feasibility of self-service workflows"
+      ],
+      "problem_solved": "Executives lacked self-service tools for accessing key business metrics and insights",
+      "impact": "Validated digital service concept, secured buy-in for ongoing development",
+      "context": "Built at Parametric Portfolio (Morgan Stanley)",
+      "timeframe": "2023",
+      "repo_url": "",
+      "demo_url": "",
+      "images": [],
+      "detailed_description_file": ""
+    }
+  ],
+
+  "skills": {
+    "product_strategy": [
+      "Product Launches",
+      "Roadmap Definition",
+      "GTM Strategy",
+      "OKR/KPI Development",
+      "User Research",
+      "Customer Journeys",
+      "Investment Operations"
+    ],
+    "technical": [
+      "Generative AI (LLMs, RAG, Agents)",
+      "Python (PCEP-Certified)",
+      "SQL",
+      "API Integrations",
+      "Automation",
+      "CRM Tools",
+      "FastAPI",
+      "Vector Databases (Pinecone)",
+      "OpenAI API",
+      "WebSockets"
+    ],
+    "leadership": [
+      "Cross-Functional Team Leadership",
+      "Stakeholder Management",
+      "Executive Communication",
+      "Strategic Partnerships/Relationships",
+      "Client Service"
+    ],
+    "data_analytics": [
+      "SQL Reporting",
+      "Product Analytics",
+      "Data Visualization",
+      "KPI Monitoring",
+      "Usage Analysis"
+    ]
+  },
+
+  "education": [
+    {
+      "degree": "MBA (Finance)",
+      "school": "Washington State University",
+      "graduation": "2021",
+      "location": "",
+      "gpa": "",
+      "relevant_courses": [],
+      "activities": []
+    },
+    {
+      "degree": "BA, Business Administration (Finance)",
+      "school": "Seattle University",
+      "graduation": "2017",
+      "location": "",
+      "gpa": "",
+      "relevant_courses": [],
+      "activities": []
+    }
+  ],
+
+  "certifications": [
+    {
+      "name": "AI Product Management",
+      "issuer": "Product Faculty (OpenAI-led)",
+      "date": "2024",
+      "status": "Completed",
+      "credential_url": ""
+    },
+    {
+      "name": "PCEP – Certified Entry-Level Python Programmer",
+      "issuer": "Python Institute",
+      "date": "2024",
+      "status": "Completed",
+      "credential_url": ""
+    },
+    {
+      "name": "PCAP – Certified Associate in Python Programming",
+      "issuer": "Python Institute",
+      "date": "2024",
+      "status": "In Progress",
+      "credential_url": ""
+    },
+    {
+      "name": "Using Python to Access Web Data & Databases",
+      "issuer": "Coursera",
+      "date": "2024",
+      "status": "Completed",
+      "credential_url": ""
+    },
+    {
+      "name": "AI Fluency: Frameworks & Foundations",
+      "issuer": "Anthropic",
+      "date": "2024",
+      "status": "Completed",
+      "credential_url": ""
+    },
+    {
+      "name": "Introduction to Model Context Protocol",
+      "issuer": "Anthropic",
+      "date": "2024",
+      "status": "Completed",
+      "credential_url": ""
+    }
+  ]
+}
