@@ -6,7 +6,7 @@ An AI-powered chatbot showcasing Dakota Radigan's professional experience, skill
 
 **Backend:**
 - FastAPI (REST API)
-- Claude 
+- Claude API
 - Qdrant (Vector search)
 
 **Frontend:**
