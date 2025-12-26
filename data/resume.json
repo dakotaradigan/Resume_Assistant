@@ -78,45 +78,42 @@
 
   "projects": [
     {
-      "name": "RAG-Based GenAI Assistant",
-      "tagline": "Enterprise chatbot resolving 3,500+ annual client inquiries autonomously",
-      "tech_stack": ["RAG", "OpenAI API", "Python", "Vector Databases", "GenAI"],
-      "description": "Architected an AI-powered assistant for client service automation, reducing response times from hours to minutes through intelligent document retrieval and natural language processing.",
+      "name": "Ben AI: Intelligent Benchmark Assistant",
+      "tagline": "Full-stack AI chatbot: Personal PoC to production deployment reducing advisor research time from hours to seconds",
+      "tech_stack": ["GPT-4o", "RAG Pipeline", "Pinecone Vector DB", "FastAPI", "WebSocket/REST", "Python", "text-embedding-3-small", "Intent Classification", "Function Calling"],
+      "description": "Designed and built enterprise-grade AI assistant from proof-of-concept to production deployment. Started as personal project to validate RAG architecture for complex financial benchmark queries, then scaled and deployed at Parametric for advisor workflow automation. Demonstrates end-to-end ownership: architecture design, technical implementation, and production scaling.",
       "highlights": [
-        "Designed RAG architecture for semantic search over investment documentation",
-        "Projected to autonomously resolve 3,500+ annual email inquiries",
-        "Reduced client response times from hours to minutes",
-        "Integrated with existing client service workflows and CRM systems"
+        "Built initial PoC validating RAG + hybrid intelligence architecture for complex benchmark eligibility queries",
+        "Designed layered architecture: User Interface → Backend (Request Router, Intent Classification, Session Handler) → AI Orchestration (Function Calling Engine, RAG Pipeline, GPT-4o) → Vector Store + Knowledge Base",
+        "Implemented natural language intelligence with intent classification routing and conversation memory",
+        "Architected hybrid AI system combining RAG retrieval, LLM reasoning, and deterministic calculations for grounded responses",
+        "Built security guardrails including prompt injection protection and input/output sanitization",
+        "Scaled from PoC to production deployment at Parametric, reducing advisor research time from 30+ minutes to seconds",
+        "Achieved tangible business impact: instant complex query resolution, organic SMAP retention, visible innovation for clients",
+        "Implemented real-time WebSocket communication with automatic REST API fallback for reliability"
       ],
-      "problem_solved": "Client service team overwhelmed with repetitive email inquiries about investment accounts, causing slow response times and reduced client satisfaction",
-      "impact": "Projected 3,500+ annual inquiry resolution, response time reduction from hours to minutes",
-      "context": "Built at Parametric Portfolio (Morgan Stanley)",
-      "timeframe": "2024",
+      "problem_solved": "Financial advisors spent hours researching complex benchmark eligibility requirements (portfolio minimums, ESG criteria, alternatives). Manual research caused workflow disruptions, email chains with 1000s of messages, and delayed client onboarding.",
+      "impact": "Reduced research time from hours/days to seconds, enabled organic SMAP ecosystem retention, created visible client-facing innovation. Projected to handle 3,500+ annual inquiries autonomously.",
+      "context": "Personal PoC (early 2025) → Production deployment at Parametric Portfolio (Morgan Stanley)",
+      "timeframe": "2025",
       "repo_url": "",
       "demo_url": "",
-      "images": [],
-      "detailed_description_file": "rag-genai-assistant.md"
-    },
-    {
-      "name": "Ben AI - Benchmark Eligibility Chatbot",
-      "tagline": "AI-powered financial advisory tool with semantic search",
-      "tech_stack": ["FastAPI", "OpenAI GPT-4", "Pinecone", "WebSockets", "JavaScript", "Python"],
-      "description": "Personal project: Built an enterprise-grade chatbot reducing financial advisor query time by 70% through intelligent benchmark search, iterative function calling, and real-time communication.",
-      "highlights": [
-        "Implemented iterative function calling with safety guardrails (max calls, timeout protection, duplicate detection)",
-        "Designed semantic search using Pinecone vector database with custom embedding pipeline",
-        "Built real-time WebSocket communication with automatic fallback to REST API",
-        "Created Claude-inspired UI with smooth animations and responsive design",
-        "Architected modular backend with separation of concerns (services, models, routing)"
-      ],
-      "problem_solved": "Financial advisors spent 30+ minutes researching benchmark eligibility requirements, leading to late-stage discovery issues",
-      "impact": "Reduced advisor research time from 30 minutes to under 2 minutes per query",
-      "context": "Personal project demonstrating full-stack AI capabilities",
-      "timeframe": "2024",
-      "repo_url": "",
-      "demo_url": "",
-      "images": ["benai-screenshot.png", "benai-architecture.png"],
-      "detailed_description_file": "benai.md"
+      "images": ["benai-architecture.png", "benai-screenshot.png"],
+      "detailed_description_file": "benai.md",
+      "architecture_details": {
+        "frontend": "Advisor natural language interface with WebSocket/REST communication and typing indicators",
+        "backend": "FastAPI with Request Router, Intent Classification, Session Handler for context management",
+        "ai_orchestration": "Function Calling Engine, GPT-4o Model, RAG Pipeline (Pinecone + semantic embeddings)",
+        "data_layer": "Vector Store (Pinecone) with benchmark embeddings + JSON knowledge base",
+        "core_capabilities": [
+          "Natural Language Intelligence - understands complex queries like 'S&P 500 but more ESG'",
+          "Intent Classification Routing - sophisticated routing to appropriate functions",
+          "Conversation Memory - smart context retention through intelligent compression",
+          "Context-Aware Response Generation - tailored answers based on portfolio size, criteria, intent",
+          "Hybrid AI Architecture - RAG + LLM + deterministic logic for accurate, grounded responses",
+          "Security Guardrails - prompt injection protection, input sanitization, output validation"
+        ]
+      }
     },
     {
       "name": "SQL Analytics Framework",
