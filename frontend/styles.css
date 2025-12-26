@@ -61,15 +61,20 @@ a:hover {
   align-items: center;
 }
 
+/* Stack intro above chat for a slim prompt bar */
 .layout {
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
   padding: 24px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .intro-card {
-  max-width: 480px;
+  max-width: 100%;
+  padding: 12px 16px;
 }
 
 .intro-card,
@@ -131,7 +136,6 @@ a:hover {
   border-radius: 10px;
   max-width: 90%;
   line-height: 1.5;
-  white-space: pre-wrap;
 }
 
 .msg.user {
@@ -149,6 +153,65 @@ a:hover {
 
 .msg-body {
   color: inherit;
+}
+
+/* Markdown formatting in bot messages */
+.msg.bot .msg-body h1,
+.msg.bot .msg-body h2,
+.msg.bot .msg-body h3 {
+  margin: 8px 0 6px 0;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.msg.bot .msg-body h1 {
+  font-size: 18px;
+}
+
+.msg.bot .msg-body h2 {
+  font-size: 16px;
+}
+
+.msg.bot .msg-body h3 {
+  font-size: 15px;
+}
+
+.msg.bot .msg-body p {
+  margin: 0 0 8px 0;
+  line-height: 1.5;
+}
+
+.msg.bot .msg-body p:last-child {
+  margin-bottom: 0;
+}
+
+.msg.bot .msg-body strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.msg.bot .msg-body em {
+  font-style: italic;
+}
+
+.msg.bot .msg-body ul {
+  margin: 6px 0;
+  padding-left: 22px;
+  list-style-type: disc;
+}
+
+.msg.bot .msg-body ul:last-child {
+  margin-bottom: 0;
+}
+
+.msg.bot .msg-body li {
+  margin: 2px 0;
+  line-height: 1.5;
+}
+
+.msg.bot .msg-body a {
+  color: var(--accent);
+  text-decoration: underline;
 }
 
 .msg-meta {
@@ -194,10 +257,6 @@ a:hover {
 }
 
 @media (max-width: 960px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-
   .chat-log {
     height: 320px;
   }
