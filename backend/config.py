@@ -25,6 +25,14 @@ class Settings:
     rate_limit_requests_per_minute: int = 20  # Max requests per session per minute
     session_max_age_seconds: int = 3600  # 1 hour - sessions older than this are cleaned up
     api_timeout_seconds: float = 30.0  # Anthropic API timeout in seconds
+    max_user_message_chars: int = 2000  # Prevent token exhaustion / abuse
+    admin_token: str = ""  # Protect admin endpoints when set (recommended in prod)
+
+    # RAG settings (Phase 3)
+    openai_api_key: str = ""  # For embeddings
+    qdrant_url: str | None = None  # None = in-memory mode
+    qdrant_api_key: str = ""  # Qdrant Cloud API key (optional for local/self-hosted)
+    use_rag: bool = True  # Enable RAG retrieval (vs static context)
 
 
 def _to_bool(value: str | None, default: bool = False) -> bool:
@@ -58,5 +66,12 @@ def get_settings() -> Settings:
         ),
         session_max_age_seconds=int(os.getenv("SESSION_MAX_AGE_SECONDS", "3600")),
         api_timeout_seconds=float(os.getenv("API_TIMEOUT_SECONDS", "30.0")),
+        max_user_message_chars=int(os.getenv("MAX_USER_MESSAGE_CHARS", "2000")),
+        admin_token=os.getenv("ADMIN_TOKEN", ""),
+        # RAG settings
+        openai_api_key=os.getenv("OPENAI_API_KEY", ""),
+        qdrant_url=os.getenv("QDRANT_URL"),  # None for in-memory
+        qdrant_api_key=os.getenv("QDRANT_API_KEY", ""),
+        use_rag=_to_bool(os.getenv("USE_RAG", "true"), default=True),
     )
 

@@ -37,6 +37,15 @@ cp .env.example .env
 uvicorn main:app --reload
 ```
 
+#### RAG (Qdrant Cloud)
+
+To enable persistent vector search with Qdrant Cloud, set these env vars in `backend/.env`:
+
+- `USE_RAG=true`
+- `OPENAI_API_KEY=...` (for embeddings)
+- `QDRANT_URL=...` (your Qdrant Cloud cluster URL)
+- `QDRANT_API_KEY=...` (your Qdrant Cloud API key)
+
 ### Frontend
 
 Open `frontend/index.html` in a browser, or serve with:
@@ -49,3 +58,11 @@ python3 -m http.server 3000
 ## Development
 
 See `CLAUDE.md` for detailed development guide and architecture decisions.
+
+### Tests
+
+Offline unit tests (no OpenAI key required):
+
+```bash
+python3 -m unittest discover -s backend -p "test_*.py"
+```
