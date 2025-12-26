@@ -344,6 +344,10 @@ def _initialize_rag(settings) -> RAGPipeline | None:
         logger.warning("OpenAI API key not configured, RAG disabled (falling back to static context)")
         return None
 
+    if not (settings.qdrant_url or "").strip():
+        logger.warning("QDRANT_URL not configured, RAG disabled (falling back to static context)")
+        return None
+
     try:
         resume_path = settings.data_dir / "resume.json"
 
@@ -409,7 +413,7 @@ def build_app() -> FastAPI:
             "rag_enabled": settings.use_rag,
             "rag_initialized": rag_pipeline is not None,
             "openai_key_configured": bool(settings.openai_api_key),
-            "qdrant_url": settings.qdrant_url or "in-memory",
+            "qdrant_url": settings.qdrant_url or "",
             "qdrant_api_key_configured": bool(settings.qdrant_api_key),
         }
 

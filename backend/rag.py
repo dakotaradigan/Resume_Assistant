@@ -4,7 +4,7 @@ RAG Pipeline: Document chunking, embedding, and retrieval for Resume Assistant.
 This module handles:
 1. Chunking resume data into semantic units
 2. Generating embeddings with OpenAI text-embedding-3-small
-3. Indexing chunks into Qdrant (in-memory)
+3. Indexing chunks into Qdrant
 4. Semantic search retrieval
 """
 
@@ -47,7 +47,7 @@ class RAGPipeline:
     def __init__(
         self,
         openai_api_key: str,
-        qdrant_url: str | None = None,
+        qdrant_url: str,
         qdrant_api_key: str = "",
         embedding_model: str = "text-embedding-3-small",
         collection_name: str = "resume",
@@ -57,7 +57,7 @@ class RAGPipeline:
 
         Args:
             openai_api_key: OpenAI API key for embeddings
-            qdrant_url: Qdrant URL (None for in-memory mode)
+            qdrant_url: Qdrant URL (required). For demos, use Qdrant Cloud.
             qdrant_api_key: Qdrant API key (used for Qdrant Cloud)
             embedding_model: OpenAI embedding model to use
             collection_name: Qdrant collection name
@@ -69,16 +69,15 @@ class RAGPipeline:
         self.embedding_model = embedding_model
         self.collection_name = collection_name
 
-        # Use in-memory Qdrant if no URL provided
-        if qdrant_url is None or qdrant_url == ":memory:":
-            logger.info("Using in-memory Qdrant (data will not persist)")
-            self.qdrant_client = QdrantClient(":memory:")
-        else:
-            logger.info(f"Connecting to Qdrant at {qdrant_url}")
-            self.qdrant_client = QdrantClient(
-                url=qdrant_url,
-                api_key=qdrant_api_key or None,
-            )
+        qdrant_url = (qdrant_url or "").strip()
+        if not qdrant_url:
+            raise ValueError("qdrant_url is required (set QDRANT_URL).")
+
+        logger.info(f"Connecting to Qdrant at {qdrant_url}")
+        self.qdrant_client = QdrantClient(
+            url=qdrant_url,
+            api_key=qdrant_api_key or None,
+        )
 
         self._initialize_collection()
 
@@ -347,7 +346,7 @@ Tech Stack: {', '.join(proj.get('tech_stack', []))}
 def initialize_rag_pipeline(
     openai_api_key: str,
     resume_path: Path,
-    qdrant_url: str | None = None,
+    qdrant_url: str,
     qdrant_api_key: str = "",
 ) -> RAGPipeline:
     """
@@ -356,7 +355,7 @@ def initialize_rag_pipeline(
     Args:
         openai_api_key: OpenAI API key
         resume_path: Path to resume.json
-        qdrant_url: Qdrant URL (None or ':memory:' for in-memory)
+        qdrant_url: Qdrant URL (required)
         qdrant_api_key: Qdrant API key (used for Qdrant Cloud)
 
     Returns:

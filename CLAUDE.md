@@ -28,7 +28,7 @@ BUT: Do NOT copy code directly - this is a different use case with different req
 
 **Resume Assistant** is a personal AI-powered chatbot designed to showcase Dakota Radigan's professional experience, skills, and projects to recruiters and hiring managers. This serves dual purposes:
 1. **Functional**: Provide an interactive way for visitors to learn about Dakota's background
-2. **Technical Showcase**: Demonstrate expertise in RAG (Retrieval Augmented Generation), vector search, multimodal AI, and modern web development
+2. **Technical Showcase**: Demonstrate expertise in RAG (Retrieval Augmented Generation), vector search, and modern web development
 
 **Deployment Target**: Public website accessible via LinkedIn profile link
 
@@ -40,7 +40,7 @@ BUT: Do NOT copy code directly - this is a different use case with different req
 
 ### Primary Objectives
 1. **Personal Branding**: Create a unique, memorable way to present professional background
-2. **Skill Demonstration**: Actively showcase RAG, vector search, and multimodal AI capabilities
+2. **Skill Demonstration**: Actively showcase RAG, vector search, and clean system design
 3. **Accessibility**: Public deployment that handles concurrent visitors efficiently
 4. **Ease of Updates**: Frequent content updates during active job search (weekly/bi-weekly)
 
@@ -48,14 +48,12 @@ BUT: Do NOT copy code directly - this is a different use case with different req
 **MUST demonstrate these skills prominently:**
 - - **RAG Architecture**: Semantic search over resume/project documents
 - - **Vector Database**: Qdrant or Chroma for document retrieval
-- - **Multimodal AI**: Claude Sonnet for text + image analysis (project screenshots, diagrams)
 - - **Real-time Communication**: WebSocket implementation
 - - **Clean UI/UX**: Professional, Claude-inspired interface
 
 ### Content Types
 - **Text Data**: Resume JSON, project descriptions (markdown), work experience narratives
 - **Documents**: PDFs (can be processed and embedded)
-- **Images**: Project screenshots, architecture diagrams, UI mockups (for multimodal analysis)
 - **Structured Data**: Skills taxonomy, timeline data, contact information
 
 ---
@@ -66,23 +64,22 @@ BUT: Do NOT copy code directly - this is a different use case with different req
 
 **Backend:**
 - **Framework**: FastAPI (proven from Ben AI chatbot)
-- **Communication**: WebSocket primary, REST fallback
-- **Vector DB**: Qdrant (free tier, better than Pinecone for small-scale, easy Docker deployment)
-- **AI Model**: Claude Sonnet 3.5 (multimodal support for images, excellent for conversational AI)
-- **Embeddings**: Voyage AI or OpenAI text-embedding-3-small
-- **Session Management**: In-memory (same as Ben AI)
+- **Communication**: REST (`POST /api/chat`) today; WebSocket is optional later
+ - **Vector DB**: Qdrant (Qdrant Cloud for demos; self-hosting optional)
+- **AI Model**: Anthropic Claude (configured via `ANTHROPIC_MODEL`)
+- **Embeddings**: OpenAI `text-embedding-3-small` (when RAG is enabled)
+- **Session Management**: In-memory (easy migration path to Redis later)
+- **Guardrails**: rate limiting, message bounds, session cleanup/compaction
 
 **Frontend:**
-- **Framework**: Vanilla JavaScript (modular architecture from Ben AI chatbot)
+- **Framework**: Vanilla JavaScript
 - **UI Style**: Claude-inspired clean design with personal branding
-- **Components**: ChatManager, WebSocketManager, SidebarManager (adapted from Ben AI)
-- **Enhancements**: Project gallery, skill visualizations, contact links
+- **API integration**: calls `fetch("/api/chat")` (assumes same-origin; backend can serve the frontend)
 
 **Data Layer:**
 - **Primary**: `data/resume.json` (structured career data)
 - **Projects**: `data/projects/*.md` (detailed project writeups)
-- **Media**: `data/images/` (project screenshots, diagrams)
-- **Vector Index**: Qdrant collection with chunked documents + metadata
+- **Vector Index**: Qdrant collection with chunked documents + metadata (Phase 3)
 
 **Deployment:**
 - **Hosting**: Railway or Render (backend), Vercel (frontend) OR all-in-one
@@ -99,7 +96,6 @@ BUT: Do NOT copy code directly - this is a different use case with different req
 - No $70/month minimum like Pinecone
 
 **Why Claude over GPT-4?**
-- Native multimodal support (text + images in same conversation)
 - Better for conversational, nuanced responses
 - 200k context window (can handle large resume corpus)
 - Showcases diversity in AI model experience
@@ -138,6 +134,8 @@ This project will be built in discrete phases. **DO NOT attempt to build everyth
 
 **Exit Criteria**: All data files created and validated, no code yet
 
+**Status**: Complete
+
 ---
 
 ### Phase 2: Basic FastAPI Backend (No Vector DB Yet)
@@ -156,6 +154,8 @@ This project will be built in discrete phases. **DO NOT attempt to build everyth
 - - Basic conversational responses work
 
 **Exit Criteria**: Can ask questions about Dakota's experience and get accurate responses via REST API
+
+**Status**: Complete (REST chat endpoint implemented, frontend calls `/api/chat`)
 
 ---
 
@@ -177,24 +177,7 @@ This project will be built in discrete phases. **DO NOT attempt to build everyth
 
 **Exit Criteria**: Questions about specific skills/projects retrieve relevant context from vector DB
 
----
-
-### Phase 4: Multimodal Support (Image Analysis)
-**Goal**: Demonstrate multimodal AI capability with project visuals
-
-**Tasks:**
-1. Add image storage strategy (local files or cloud storage)
-2. Update data schema to include image references per project
-3. Implement image encoding for Claude API
-4. Create queries that trigger image analysis ("Show me the Ben AI interface")
-5. Update frontend to display images in chat
-
-**Deliverables:**
-- - Project screenshots stored and accessible
-- - Claude can analyze and describe project images
-- - Images display inline in chat responses
-
-**Exit Criteria**: Can ask "What does the X project look like?" and get image + analysis
+**Status**: Implemented (RAG retrieval + Qdrant indexing + offline tests). Persistence is optional via `QDRANT_URL`.
 
 ---
 
@@ -284,7 +267,7 @@ This project will be built in discrete phases. **DO NOT attempt to build everyth
 4. **Test Each Phase**: Ensure functionality before proceeding to next phase
 
 ## Production & Scalability Guardrails
-- **State & Sessions**: Anything stateful (sessions/chat history/rate limits) must be pluggable. Default to in-memory for local dev; plan to swap to a shared store (e.g., Redis) when running multiple workers/containers.
+- **State & Sessions**: Anything stateful (sessions/chat history/rate limits) must be pluggable. Default to memory-backed for local dev; plan to swap to a shared store (e.g., Redis) when running multiple workers/containers.
 - **Config**: All secrets/URLs via environment variables; keep `.env.example` current. No hardcoded keys.
 - **Model Selection**: Use `ANTHROPIC_MODEL` env; default `claude-opus-latest`. Pin a dated model only if you need deterministic behavior.
 - **Timeouts/Retries**: Set sensible client/server timeouts and return user-friendly errors on upstream failures.
@@ -359,8 +342,7 @@ This project must remain clean, organized, and maintainable throughout developme
 | **Data Volume** | 40+ benchmarks, structured | 5-10 projects, semi-structured |
 | **Query Style** | Deterministic lookups ("What's the minimum?") | Conversational exploration ("Tell me about...") |
 | **Vector DB** | Pinecone (enterprise) | Qdrant (free tier, smaller scale) |
-| **AI Model** | OpenAI GPT-4 | Claude Sonnet (multimodal) |
-| **Multimodal** | No | Yes (project images, diagrams) |
+| **AI Model** | OpenAI GPT-4 | Anthropic Claude |
 | **Function Calling** | 3 complex functions (required) | 1-2 simple functions (optional) |
 | **Security** | High (prevent hallucination, financial context) | Moderate (personal data, no sensitive info) |
 | **Updates** | Periodic (monthly benchmark data) | Frequent (weekly during job search) |
@@ -375,7 +357,7 @@ This project must remain clean, organized, and maintainable throughout developme
 {
   "personal": {name, title, location, contact, links, summary},
   "experience": [{company, role, duration, achievements, technologies}],
-  "projects": [{name, tech_stack, description, highlights, links, images}],
+  "projects": [{name, tech_stack, description, highlights, links}],
   "skills": {languages, frameworks, ai_ml, databases, tools},
   "education": [{degree, school, graduation, details}],
   "certifications": [{name, issuer, date}] (optional),
@@ -400,10 +382,6 @@ What challenge did this address?
 
 ## Impact/Results
 Quantifiable outcomes if available
-
-## Images
-- screenshots/architecture-diagram.png
-- screenshots/ui-mockup.png
 ```
 
 ---
@@ -426,9 +404,12 @@ The assistant should excel at answering:
 
 When updating content:
 1. Edit `data/resume.json` or create new project markdown file
-2. Run embedding update script to re-index Qdrant (Phase 3+)
-3. Test locally to ensure changes reflected
-4. Deploy updates (should be < 5 minutes end-to-end)
+2. If RAG is disabled (`USE_RAG=false`): restart the backend (or call the cache clear endpoint in dev)
+3. If RAG is enabled (`USE_RAG=true`): re-indexing may be needed depending on your Qdrant mode
+   - In-memory Qdrant: restart the backend (it will index on startup if the collection is empty)
+   - Persistent Qdrant: plan for an explicit re-index step (future: add an admin reindex endpoint or a CLI script)
+4. Test locally to ensure changes reflected
+5. Deploy updates (should be < 5 minutes end-to-end)
 
 **DO NOT** require complex rebuild processes for content updates.
 
@@ -439,7 +420,6 @@ When updating content:
 **Technical:**
 - - RAG retrieval accuracy (returns relevant projects for skill queries)
 - - Response time < 3 seconds for typical queries
-- - Multimodal responses work smoothly (images load quickly)
 - - WebSocket connection stability (minimal fallback to REST)
 
 **User Experience:**
@@ -464,12 +444,12 @@ When updating content:
 
 ---
 
-## Current Phase: **Phase 1 - Foundation & Data Structure**
+## Current Focus: **Next Direction TBD**
 
-**Next Steps:**
-1. Create project folder structure
-2. Define and populate resume.json with Dakota's real data
-3. Write 2-3 sample project markdown files
-4. Set up requirements.txt
+**Near-term options to decide on:**
+1. **WebSocket vs REST-only**: keep REST as-is, or add WebSockets for realtime UX
+2. **RAG persistence**: use Qdrant Cloud for demos; decide later if self-hosting is needed
+3. **Frontend polish**: tighten UX, add “How this was built”, improve suggested prompts
+4. **Deployment**: choose hosting + domain strategy and lock CORS/origins for production
 
-**DO NOT proceed to Phase 2 until Phase 1 is complete and reviewed.**
+**Note**: This file should reflect intentional commitments. Avoid adding speculative feature phases until the direction is chosen.

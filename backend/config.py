@@ -30,8 +30,8 @@ class Settings:
 
     # RAG settings (Phase 3)
     openai_api_key: str = ""  # For embeddings
-    qdrant_url: str | None = None  # None = in-memory mode
-    qdrant_api_key: str = ""  # Qdrant Cloud API key (optional for local/self-hosted)
+    qdrant_url: str | None = None  # Required when USE_RAG=true
+    qdrant_api_key: str = ""  # Qdrant Cloud API key (optional, depending on cluster)
     use_rag: bool = True  # Enable RAG retrieval (vs static context)
 
 
@@ -70,7 +70,7 @@ def get_settings() -> Settings:
         admin_token=os.getenv("ADMIN_TOKEN", ""),
         # RAG settings
         openai_api_key=os.getenv("OPENAI_API_KEY", ""),
-        qdrant_url=os.getenv("QDRANT_URL"),  # None for in-memory
+        qdrant_url=os.getenv("QDRANT_URL"),
         qdrant_api_key=os.getenv("QDRANT_API_KEY", ""),
         use_rag=_to_bool(os.getenv("USE_RAG", "true"), default=True),
     )
