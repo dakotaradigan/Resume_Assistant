@@ -283,6 +283,20 @@ This project will be built in discrete phases. **DO NOT attempt to build everyth
 3. **No One-Shot Builds**: Break large changes into reviewable chunks
 4. **Test Each Phase**: Ensure functionality before proceeding to next phase
 
+## Production & Scalability Guardrails
+- **State & Sessions**: Anything stateful (sessions/chat history/rate limits) must be pluggable. Default to in-memory for local dev; plan to swap to a shared store (e.g., Redis) when running multiple workers/containers.
+- **Config**: All secrets/URLs via environment variables; keep `.env.example` current. No hardcoded keys.
+- **Model Selection**: Use `ANTHROPIC_MODEL` env; default `claude-opus-latest`. Pin a dated model only if you need deterministic behavior.
+- **Timeouts/Retries**: Set sensible client/server timeouts and return user-friendly errors on upstream failures.
+- **Streaming**: Prefer streaming responses for UX; keep REST fallback.
+- **CORS/Security**: Tighten allowed origins for production; add security headers (CSP, etc.) before go-live.
+- **Logging/Metrics**: Structured logs (omit PII); track latency/error rates. Include health and readiness probes.
+- **Testing/CI**: Add smoke tests (`/health`) and mocked chat tests; run lint/format in CI.
+- **Static Assets**: Frontend should build as static assets; avoid coupling to backend hostnames (use relative paths or configurable base URLs).
+- **RAG Layer**: Keep retrieval behind a small interface so local/Qdrant/cloud backends can swap without touching chat handlers.
+- **Rate Limits/Abuse**: Plan for simple per-session/IP rate limits in production.
+- **Deploy Targets**: Default assumption—backend on Railway/Render + Qdrant Cloud or containerized Qdrant; frontend on Vercel/static hosting; custom domain with HTTPS.
+
 ### Code Quality Standards
 
 **CRITICAL PRINCIPLE: Avoid Technical Debt from Day One**
