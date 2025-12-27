@@ -24,7 +24,7 @@
         "Led technical investment integration with Wells Fargo, aligning internal/external engineering teams to deliver pilot 2 weeks early—securing $32M initial AUM and a $3B+ pipeline",
         "Launched new investment product MVP ahead of schedule; validated market needs and iterated rapidly to capture $75M AUM within 6 months of release",
         "Shipped 3 high-impact features reducing manual client touchpoints on ~75k accounts",
-        "Architected a RAG-based GenAI assistant projected to autonomously resolve ~3,500+ annual email inquiries and slash response times for clients from hours to minutes",
+        "Brought Ben AI from personal PoC to production deployment—architected and scaled the RAG-based GenAI assistant, projected to autonomously resolve ~3,500+ annual email inquiries and slash response times from hours to minutes",
         "Established product analytics to monitor KPIs (time-to-onboard, adoption), identifying friction and pain points to drive data-backed roadmap prioritization",
         "Appointed firm-wide 'AI Champion,' leading an 8-person task force to drive strategy. Increased Copilot adoption by 60% in 2 months and secured budget for dedicated engineering to scale custom OpenAI API solutions"
       ],
@@ -81,15 +81,15 @@
       "name": "Ben AI: Intelligent Benchmark Assistant",
       "tagline": "Full-stack AI chatbot: Personal PoC to production deployment reducing advisor research time from hours to seconds",
       "tech_stack": ["GPT-4o", "RAG Pipeline", "Pinecone Vector DB", "FastAPI", "WebSocket/REST", "Python", "text-embedding-3-small", "Intent Classification", "Function Calling"],
-      "description": "Designed and built enterprise-grade AI assistant from proof-of-concept to production deployment. Started as personal project to validate RAG architecture for complex financial benchmark queries, then scaled and deployed at Parametric for advisor workflow automation. Demonstrates end-to-end ownership: architecture design, technical implementation, and production scaling.",
+      "description": "Personal project evolved to production deployment: Built enterprise-grade AI assistant starting as a home PoC (early 2025) to validate RAG architecture for complex financial benchmark queries. After proving technical viability, brought it to Parametric and scaled it to production for advisor workflow automation. Single cohesive project demonstrating end-to-end ownership from initial architecture design through production scaling.",
       "highlights": [
-        "Built initial PoC validating RAG + hybrid intelligence architecture for complex benchmark eligibility queries",
+        "Phase 1 (Personal PoC): Built initial proof-of-concept at home to validate RAG + hybrid intelligence architecture for complex benchmark eligibility queries",
+        "Phase 2 (Production): Brought validated PoC to Parametric, scaled architecture to handle production workload, reducing advisor research time from 30+ minutes to seconds",
         "Designed layered architecture: User Interface → Backend (Request Router, Intent Classification, Session Handler) → AI Orchestration (Function Calling Engine, RAG Pipeline, GPT-4o) → Vector Store + Knowledge Base",
         "Implemented natural language intelligence with intent classification routing and conversation memory",
         "Architected hybrid AI system combining RAG retrieval, LLM reasoning, and deterministic calculations for grounded responses",
         "Built security guardrails including prompt injection protection and input/output sanitization",
-        "Scaled from PoC to production deployment at Parametric, reducing advisor research time from 30+ minutes to seconds",
-        "Achieved tangible business impact: instant complex query resolution, organic SMAP retention, visible innovation for clients",
+        "Achieved tangible business impact: projected to handle 3,500+ annual inquiries autonomously, instant complex query resolution, organic SMAP retention, visible client-facing innovation",
         "Implemented real-time WebSocket communication with automatic REST API fallback for reliability"
       ],
       "problem_solved": "Financial advisors spent hours researching complex benchmark eligibility requirements (portfolio minimums, ESG criteria, alternatives). Manual research caused workflow disruptions, email chains with 1000s of messages, and delayed client onboarding.",
