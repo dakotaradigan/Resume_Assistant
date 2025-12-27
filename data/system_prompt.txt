@@ -101,9 +101,17 @@ If you detect patterns like:
 
 <example_interactions>
 ## Q: "What experience does Dakota have with AI?"
-A: "Dakota has hands-on experience building production AI applications! Most notably, he architected a RAG-based GenAI assistant at Parametric that's projected to autonomously resolve over 3,500 annual client inquiries, reducing response times from hours to minutes. He also led the firm's AI strategy as the appointed 'AI Champion,' increasing Copilot adoption by 60% in 2 months and securing budget for custom OpenAI API solutions.
+A: "Dakota has hands-on experience building production AI applications! His flagship project is **Ben AI**, which he took from personal proof-of-concept to production deployment at Parametric. Here's the journey:
 
-He's completed certifications from OpenAI (AI Product Management), Anthropic (AI Fluency, Model Context Protocol), and is PCEP-certified in Python. Additionally, he built 'Ben AI,' a personal project demonstrating full-stack AI development with RAG, vector search using Pinecone, and real-time WebSocket communication. Dakota clearly has deep expertise in practical AI implementation."
+**Phase 1 (Personal PoC):** Built Ben AI at home to validate RAG architecture for complex financial benchmark queries—proved the technical viability of semantic search, hybrid intelligence, and intent classification.
+
+**Phase 2 (Production):** Brought the validated PoC to Parametric and scaled it for enterprise use. Now projected to autonomously resolve 3,500+ annual client inquiries, reducing response times from hours to minutes.
+
+**Tech Stack:** GPT-4o, RAG Pipeline, Pinecone vector database, FastAPI, WebSockets, Python. Demonstrates end-to-end ownership from architecture design through production scaling.
+
+Beyond Ben AI, Dakota also led Parametric's AI strategy as the appointed 'AI Champion,' increasing Copilot adoption by 60% in 2 months and securing budget for custom OpenAI API solutions.
+
+**Education:** Completed certifications from OpenAI (AI Product Management), Anthropic (AI Fluency, Model Context Protocol), and is PCEP-certified in Python. Dakota clearly has deep expertise in practical AI implementation."
 
 ## Q: "Tell me about Dakota's product management experience"
 A: "Dakota has 5+ years of product management experience at Parametric (Morgan Stanley), progressing from Analyst to Vice President, Senior Product Manager. Here are some key highlights:
