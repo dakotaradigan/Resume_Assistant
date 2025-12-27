@@ -2,36 +2,83 @@
 
 An AI-powered chatbot showcasing Dakota Radigan's professional experience, skills, and projects.
 
+**Status**: Production-Ready | **Current Phase**: Deployment Pending | **Tech Showcase**: RAG + Vector Search + FastAPI
+
+---
+
 ## Tech Stack
 
 **Backend:**
-- FastAPI (REST API)
-- Claude API
-- Optional RAG (Qdrant + OpenAI embeddings)
+- FastAPI (REST API with session management)
+- Anthropic Claude Opus 4.5
+- RAG Pipeline (Qdrant vector DB + OpenAI embeddings, toggleable via USE_RAG)
+- Production guardrails (rate limiting, timeout protection, message compaction)
 
 **Frontend:**
 - Vanilla JavaScript (modular architecture)
 - Custom CSS (Claude-inspired UI)
 
-## What’s Implemented
+## What's Implemented
 
-- **Chat API**: `POST /api/chat` (session-aware via `session_id`)
-- **Frontend served by backend**: open `http://127.0.0.1:8000/`
-- **Health checks**: `GET /health`, `GET /health/rag`
-- **Safety/scalability guardrails**: memory-backed sessions, compaction, rate limiting
-- **RAG retrieval (optional)**:
-  - Uses Qdrant (remote endpoint via `QDRANT_URL`)
-  - Uses OpenAI embeddings (`text-embedding-3-small`) when enabled
+### Core Features
+- **REST Chat API**: `POST /api/chat` with UUID-based session management
+- **Frontend**: Claude-inspired UI served by backend at `http://127.0.0.1:8000/`
+- **RAG Pipeline**: Semantic search with Qdrant + OpenAI embeddings (toggleable)
+- **Health Endpoints**: `GET /health`, `GET /health/rag`
+
+### Production Guardrails
+- **Rate Limiting**: 20 requests/minute per IP with automatic cleanup
+- **Session Management**: UUID-based with automatic expiration (1 hour default)
+- **Message Compaction**: Summarizes old messages to prevent token exhaustion
+- **Input Validation**: Message length limits (2000 chars), empty message checks
+- **Timeout Protection**: 30s default timeout for API calls
+- **Error Handling**: Graceful fallback from RAG to static context
+
+### Security Features
+- **Prompt Injection Defenses**: System prompt firewall with XML-style tags
+- **XSS Protection**: HTML escaping in markdown parser
+- **CORS Configuration**: Environment-aware allowed origins
+- **Admin Endpoint Protection**: Token-based authentication for cache clearing
+
+### UX Features
+- **Markdown Rendering**: Rich text formatting in bot responses
+- **Quick-Start Chips**: Suggested prompts for common queries
+- **Professional Branding**: Terracotta accent colors, clean typography
+- **Contact Links**: LinkedIn, GitHub, email in header
+- **Auto-scroll**: Smooth scrolling to latest messages
+
+## Deployment Readiness
+
+**Status**: Production-Ready
+
+The application is fully functional and ready for deployment:
+- REST API tested and operational
+- Frontend complete with professional UI
+- RAG pipeline working with Qdrant Cloud support
+- Security measures in place (rate limiting, prompt injection defenses)
+- Scalability guardrails implemented (session cleanup, message compaction)
+
+**Before Deployment:**
+1. Configure environment variables (see `.env.example`)
+2. Update CORS allowed origins in `backend/main.py:380`
+3. Set up Qdrant Cloud instance (or Docker deployment)
+4. Choose hosting platform (Railway, Render, Vercel)
+5. Configure custom domain and SSL
+
+See `CLAUDE.md` Phase 7 for detailed deployment checklist.
 
 ## Project Phases
 
 - **Phase 1**: Foundation & Data Structure (Complete)
-- **Phase 2**: Basic Chat with fetch() (REST API) (Complete)
-- **Phase 3**: Vector Search (RAG) (Implemented; persistence optional)
-- **Phase 4**: Multimodal Support (Images) (Pending)
-- **Phase 5**: WebSocket (Optional) (Pending)
-- **Phase 6**: Frontend Polish (Pending)
-- **Phase 7**: Deployment (Pending)
+- **Phase 2**: Basic Chat with REST API (Complete)
+- **Phase 3**: Vector Search (RAG Pipeline) (Complete)
+- **Phase 4**: Multimodal Support (Removed - text-only approach)
+- **Phase 5**: WebSocket Real-Time Communication (Optional - Not Started)
+- **Phase 6**: Frontend Development (Complete - Polish Pending)
+- **Phase 7**: Deployment & Public Access (Next Major Milestone)
+- **Phase 8**: Post-Launch Enhancements (Future)
+
+**Current Status**: Production-ready application at Phase 6, ready for deployment (Phase 7).
 
 ## Setup
 
@@ -90,17 +137,26 @@ To disable RAG and always use the local `data/resume.json` context:
 
 ### Frontend
 
-The backend serves the frontend at `/`, so the simplest workflow is:
+**Recommended**: Backend serves the frontend at `/` (all-in-one deployment):
 
-- Start the backend (`uvicorn main:app --reload`)
-- Open `http://127.0.0.1:8000/`
+```bash
+# Start backend (serves both API and frontend)
+cd backend
+uvicorn main:app --reload
 
-If you serve `frontend/` separately, you’ll need to ensure requests reach the backend (the frontend currently calls `fetch("/api/chat")`, i.e., same-origin).
+# Open browser
+open http://127.0.0.1:8000/
+```
+
+**Alternative**: Serve frontend separately (requires CORS configuration):
 
 ```bash
 cd frontend
 python3 -m http.server 3000
+# Frontend will call backend at localhost:8000
 ```
+
+Note: Separate serving requires updating `fetch()` calls in `app.js` to use full backend URL.
 
 ## Development
 
