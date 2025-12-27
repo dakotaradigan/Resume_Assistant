@@ -45,11 +45,14 @@ BUT: Do NOT copy code directly - this is a different use case with different req
 4. **Ease of Updates**: Frequent content updates during active job search (weekly/bi-weekly)
 
 ### Technical Showcase Priorities
-**MUST demonstrate these skills prominently:**
-- - **RAG Architecture**: Semantic search over resume/project documents
-- - **Vector Database**: Qdrant or Chroma for document retrieval
-- - **Real-time Communication**: WebSocket implementation
-- - **Clean UI/UX**: Professional, Claude-inspired interface
+**Currently Demonstrated:**
+- **RAG Architecture**: Semantic search over resume/project documents with intelligent chunking
+- **Vector Database**: Qdrant integration with OpenAI embeddings
+- **Production API**: FastAPI with session management, rate limiting, and scalability guardrails
+- **Clean UI/UX**: Professional, Claude-inspired interface with markdown rendering
+
+**Optional Enhancements:**
+- **Real-time Communication**: WebSocket implementation (REST API currently production-ready)
 
 ### Content Types
 - **Text Data**: Resume JSON, project descriptions (markdown), work experience narratives
@@ -100,11 +103,13 @@ BUT: Do NOT copy code directly - this is a different use case with different req
 - 200k context window (can handle large resume corpus)
 - Showcases diversity in AI model experience
 
-**Why Keep WebSocket Architecture?**
-- Demonstrates real-time system design skills
+**Why Consider WebSocket Enhancement (Optional)?**
+- Would demonstrate real-time system design skills
 - Better UX (typing indicators, instant responses)
-- Proven implementation from Ben AI chatbot
-- Differentiates from simple chat interfaces
+- Proven implementation pattern from Ben AI chatbot
+- Would differentiate from simple chat interfaces
+
+**Current Status:** REST API is production-ready and provides excellent UX. WebSocket would be an enhancement, not a requirement.
 
 ---
 
@@ -177,12 +182,23 @@ This project will be built in discrete phases. **DO NOT attempt to build everyth
 
 **Exit Criteria**: Questions about specific skills/projects retrieve relevant context from vector DB
 
-**Status**: Implemented (RAG retrieval + Qdrant indexing + offline tests). Persistence is optional via `QDRANT_URL`.
+**Status**: **Complete** - RAG pipeline fully operational with Qdrant integration, OpenAI embeddings, semantic search, and integration tests.
 
 ---
 
-### Phase 5: WebSocket Real-Time Communication
+### Phase 4: Multimodal Support (REMOVED)
+**Status**: **Explicitly Removed from Roadmap**
+
+**Reason**: Project simplified to focus on streamlined text-based approach. Removed in commit d248856 ("Removed references to multimodal support in favor of a more streamlined approach").
+
+**Decision**: Text-only RAG provides sufficient technical showcase without added complexity.
+
+---
+
+### Phase 5: WebSocket Real-Time Communication (Optional Enhancement)
 **Goal**: Add WebSocket for better UX and technical showcase
+
+**Status**: **Optional - Not Started** (REST API is production-ready)
 
 **Tasks:**
 1. Implement WebSocket endpoint (copy from Ben AI chatbot)
@@ -204,12 +220,12 @@ This project will be built in discrete phases. **DO NOT attempt to build everyth
 **Goal**: Build professional, branded chat interface
 
 **Tasks:**
-1. Copy Ben AI frontend structure (HTML, CSS, JS modules)
-2. Customize branding (colors, logo, personal touches)
-3. Update sidebar with resume-specific quick queries
-4. Add header with Download Resume PDF, LinkedIn, GitHub links
-5. Create project gallery view (optional enhancement)
-6. Implement WebSocket client with fallback
+1. [DONE] Copy Ben AI frontend structure (HTML, CSS, JS modules)
+2. [DONE] Customize branding (colors, logo, personal touches)
+3. [DONE] Update sidebar with resume-specific quick queries
+4. [DONE] Add header with Download Resume PDF, LinkedIn, GitHub links
+5. [OPTIONAL] Create project gallery view (optional enhancement)
+6. [OPTIONAL] Implement WebSocket client with fallback (depends on Phase 5)
 
 **Deliverables:**
 - - Responsive chat interface
@@ -219,10 +235,18 @@ This project will be built in discrete phases. **DO NOT attempt to build everyth
 
 **Exit Criteria**: Fully functional UI that feels professional and personal
 
+**Status**: **Complete** - Functional UI with personal branding, quick-start chips, markdown rendering, and contact links. Optional enhancements pending:
+- "How this was built" explainer section
+- Project gallery view
+- Enhanced suggested prompts based on analytics
+- WebSocket client (if Phase 5 implemented)
+
 ---
 
 ### Phase 7: Deployment & Public Access
 **Goal**: Deploy to production and make publicly accessible
+
+**Status**: **Pending** - Application is production-ready, awaiting deployment configuration
 
 **Tasks:**
 1. Set up Qdrant Cloud free tier (or Docker on Railway/Render)
@@ -245,6 +269,8 @@ This project will be built in discrete phases. **DO NOT attempt to build everyth
 
 ### Phase 8: Polish & Enhancements (Post-Launch)
 **Goal**: Iterative improvements based on usage
+
+**Status**: **Future** - Only after successful deployment and user feedback
 
 **Possible Enhancements:**
 - Skill tag visualization (interactive word cloud)
@@ -352,7 +378,7 @@ This project must remain clean, organized, and maintainable throughout developme
 
 ## Content Structure
 
-### resume.json Schema (To Be Populated)
+### resume.json Schema (Current Structure)
 ```
 {
   "personal": {name, title, location, contact, links, summary},
@@ -417,10 +443,15 @@ When updating content:
 
 ## Success Metrics
 
-**Technical:**
-- - RAG retrieval accuracy (returns relevant projects for skill queries)
-- - Response time < 3 seconds for typical queries
-- - WebSocket connection stability (minimal fallback to REST)
+**Technical (Current Implementation):**
+- RAG retrieval accuracy (returns relevant projects for skill queries)
+- Response time < 3 seconds for typical queries
+- Session management with automatic compaction
+- Rate limiting prevents abuse (20 req/min per IP)
+
+**Optional Future Metrics:**
+- WebSocket connection stability (if Phase 5 implemented)
+- Response streaming latency
 
 **User Experience:**
 - - Recruiters spend 2-5 minutes exploring vs 30 seconds on traditional resume
@@ -444,12 +475,25 @@ When updating content:
 
 ---
 
-## Current Focus: **Next Direction TBD**
+## Current Status: **Production-Ready, Deployment Pending**
 
-**Near-term options to decide on:**
-1. **WebSocket vs REST-only**: keep REST as-is, or add WebSockets for realtime UX
-2. **RAG persistence**: use Qdrant Cloud for demos; decide later if self-hosting is needed
-3. **Frontend polish**: tighten UX, add “How this was built”, improve suggested prompts
-4. **Deployment**: choose hosting + domain strategy and lock CORS/origins for production
+**What's Complete:**
+- Backend: FastAPI + Claude + RAG pipeline fully operational
+- Frontend: Functional UI with personal branding
+- Data: resume.json populated, project descriptions written
+- Security: Prompt injection defenses, rate limiting, input validation
+- Scalability: Session management, message compaction, timeout protection
 
-**Note**: This file should reflect intentional commitments. Avoid adding speculative feature phases until the direction is chosen.
+**Next Major Milestone: Deployment (Phase 7)**
+1. Set up Qdrant Cloud free tier
+2. Deploy backend to Railway/Render with environment variables
+3. Configure custom domain/subdomain
+4. Update CORS allowed origins for production
+5. Test from external network
+6. Update LinkedIn profile with link
+
+**Optional Enhancements (Post-Deployment):**
+- WebSocket support (Phase 5)
+- "How this was built" section
+- Analytics integration
+- Frontend polish items from Phase 6
